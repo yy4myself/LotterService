@@ -2,6 +2,8 @@ package com.yinyuan.lotter.dao;
 
 import com.yinyuan.lotter.model.LotteryRecord;
 
+import java.util.List;
+
 /**
  * 数据库操作的接口类
  */
@@ -26,4 +28,12 @@ public interface LotteryDao {
      * @return 中奖记录
      */
     LotteryRecord search(String date, String type);
+
+    /**
+     * 查询所有记录
+     *
+     * @param type 彩票类型
+     * @return 彩票记录
+     */
+    List<LotteryRecord> searchAll(String type);
 }

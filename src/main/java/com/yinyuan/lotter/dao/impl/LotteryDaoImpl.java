@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 数据库接口的实现类
  */
@@ -48,5 +50,13 @@ public class LotteryDaoImpl implements LotteryDao {
         LotteryRecord result = mongotemplate.findOne(query, LotteryRecord.class);
         log.info(TAG + "执行查询操作：开奖日期 = " + date + ";类型 = " + type + ";结果 = " + result);
         return result;
+    }
+
+    @Override
+    public List<LotteryRecord> searchAll(String type) {
+        Query query = new Query(Criteria.where("type").is(type));
+        List<LotteryRecord> list = mongotemplate.find(query, LotteryRecord.class);
+        log.info(TAG + "执行查询操作：类型 = " + type + ";结果总量 = " + list.size());
+        return list;
     }
 }

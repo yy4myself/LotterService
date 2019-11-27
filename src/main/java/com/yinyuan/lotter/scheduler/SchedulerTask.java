@@ -22,7 +22,7 @@ public class SchedulerTask {
     /**
      * 服务开启1s后首次执行，然后每24小时执行一次
      */
-    @Scheduled(initialDelay = 1000, fixedRate = 24 * 60 * 60 * 1000)
+    @Scheduled(initialDelay = 24 * 60 * 60 * 1000, fixedRate = 24 * 60 * 60 * 1000)
     private void process() {
         log.info("执行定时任务");
         lotteryController.quireLotteryRecord("ssq");
