@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 中奖记录，用来存放在数据库中
  */
 @Data
-@Document(collection = "lottery_record")
+@Document(collection = "lottery_record_histroy")
 public class LotteryRecord {
 
     /**
@@ -33,5 +33,5 @@ public class LotteryRecord {
     /**
      * 彩票Id
      */
-    private String lotteryNo;
+    private int lotteryNo;
 }
