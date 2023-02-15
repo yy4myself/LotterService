@@ -1,5 +1,6 @@
 package com.yinyuan.lotter.scheduler;
 
+import com.yinyuan.lotter.constant.LotteryTypeConstants;
 import com.yinyuan.lotter.controller.LotteryController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ public class SchedulerTask {
     /**
      * 服务开启1s后首次执行，然后每24小时执行一次
      */
-    @Scheduled(initialDelay = 1000, fixedRate = 24 * 60 * 60 * 1000)
+    @Scheduled(initialDelay = 48 * 60 * 60 * 1000, fixedRate = 48 * 60 * 60 * 1000)
     private void process() {
         log.info("执行定时任务");
-//        lotteryController.requireRecentLotteryRecord("ssq");
+        lotteryController.requireRecentLotteryRecord(LotteryTypeConstants.ssq);
     }
 }

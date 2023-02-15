@@ -1,5 +1,6 @@
 package com.yinyuan.lotter;
 
+import com.yinyuan.lotter.constant.LotteryTypeConstants;
 import com.yinyuan.lotter.controller.LotteryController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class LotteryApplicationRunner implements ApplicationRunner, Ordered {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("LotteryApplicationRunner run");
+        lotteryController.requireRecentLotteryRecord(LotteryTypeConstants.ssq);
         lotteryController.analysisLotteryRecord();
     }
 

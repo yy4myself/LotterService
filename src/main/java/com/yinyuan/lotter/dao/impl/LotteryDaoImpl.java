@@ -4,6 +4,7 @@ import com.yinyuan.lotter.dao.LotteryDao;
 import com.yinyuan.lotter.model.LotteryRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -55,8 +56,19 @@ public class LotteryDaoImpl implements LotteryDao {
     @Override
     public List<LotteryRecord> searchAll(String type) {
         Query query = new Query(Criteria.where("type").is(type));
+        query.with(Sort.by(new Sort.Order(Sort.Direction.DESC, "lotteryNo")));
         List<LotteryRecord> list = mongotemplate.find(query, LotteryRecord.class);
         log.info(TAG + "执行查询操作：类型 = " + type + ";结果总量 = " + list.size());
+        return list;
+    }
+
+    @Override
+    public List<LotteryRecord> searchRecent(String type, int num) {
+        Query query = new Query(Criteria.where("type").is(type));
+        query.with(Sort.by(new Sort.Order(Sort.Direction.DESC, "lotteryNo")));
+        query.limit(num);
+        List<LotteryRecord> list = mongotemplate.find(query, LotteryRecord.class);
+        log.info(TAG + "执行查询最近 " + num + "期操作：类型 = " + type + ";结果总量 = " + list.size());
         return list;
     }
 }

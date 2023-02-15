@@ -36,4 +36,12 @@ public interface LotteryDao {
      * @return 彩票记录
      */
     List<LotteryRecord> searchAll(String type);
+
+    /**
+     * 
+     * @param type 彩票类型
+     * @param num 最近的X期
+     * @return
+     */
+    List<LotteryRecord> searchRecent(String type, int num);
 }
